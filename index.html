@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تغيير الخلفية حسب الرابط</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <script>
+        // دالة لتحديث الخلفية بناء على الـ hash
+        function updateBackground() {
+            const id = window.location.hash.substring(1); // تجاهل الـ #
+            
+            // تحقق من صحة الرقم
+            if (id < 1 || id > 123 || isNaN(id)) {
+                document.body.style.backgroundImage = 'none';
+                document.getElementById('message').innerHTML = 
+                    '<h1>⚠️ خطأ: الرقم يجب أن يكون بين 1 و123</h1>';
+                return;
+            }
+
+            // تعيين الخلفية
+            document.body.style.backgroundImage = `url('images/${id}.jpg')`;
+        }
+
+        // استمع لتغييرات في الـ hash
+        window.addEventListener('hashchange', updateBackground);
+        
+        // تحديث الخلفية عند تحميل الصفحة
+        updateBackground();
+    </script>
+</body>
+</html>
